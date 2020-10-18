@@ -1,29 +1,21 @@
 // Dependencies
 var express = require("express");
-var path = require("path");
+// var path = require("path");
+
+const fs = require("fs");
 
 // Create Express server
 var app = express();
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
-// var notes_db =
+// var notes = require("./db/db.json");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// HTML routes
-app.get("/notes", function(req, res) {
-    res.sendFile(path.join(__dirname, "/public/notes.html"));
-});
+require("./routes/apiRoutes.js")(app, fs);
+require("./routes/htmlRoutes.js")(app);
 
-app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "/public/index.html"));
-});
-
-// API routes
-app.get("/api/notes", function(req, res) {
-    return res.json(notes_db);
-});
 
 
 app.listen(PORT, function() {

@@ -1,0 +1,23 @@
+{
+  "name": "011_note-taker",
+  "version": "1.0.0",
+  "description": "note taker",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Piotr72us/note-taker.git"
+  },
+  "author": "piotr dudek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Piotr72us/note-taker/issues"
+  },
+  "homepage": "https://github.com/Piotr72us/note-taker#readme"
+}
