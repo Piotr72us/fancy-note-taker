@@ -9,7 +9,7 @@
 // const notesDB = require("../db/db.json")
 
 module.exports = function(app, fs) {
-    const notesDB = require("../db/db.json")
+    let notesDB = require("../db/db.json")
     // const fs = require("fs");
 // const userRoutes = (app, fs) => {
     // variables
@@ -39,7 +39,8 @@ module.exports = function(app, fs) {
         // res.json(newNote);
         console.log(notesDB);
 
-        fs.readFileSync(dataPath)
+        fs.writeFileSync("./db/db.json", JSON.stringify(notesDB));
+        res.json(notesDB);
     
     });
 
