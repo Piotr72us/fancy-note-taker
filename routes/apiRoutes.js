@@ -30,7 +30,7 @@ module.exports = function(app, fs) {
     app.post("/api/notes", (req, res) => {
         
         var newNote = req.body;
-        var id = notesDB.length;
+        var id = (notesDB.length).toString();
         newNote.id = id;
         console.log(newNote);
 
@@ -42,7 +42,7 @@ module.exports = function(app, fs) {
 
         console.log(notesDB);
 
-        fs.writeFileSync("./db/db.json", JSON.stringify(notesDB));
+        fs.writeFileSync("./db/db.json", JSON.stringify(notesDB, null, 2));
         res.json(notesDB);
     
     });
@@ -77,7 +77,7 @@ module.exports = function(app, fs) {
         newID++;
     }
 
-    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
+    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes, null, 2));
     res.json(savedNotes);
 
 
