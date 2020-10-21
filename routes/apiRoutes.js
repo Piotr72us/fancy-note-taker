@@ -34,15 +34,55 @@ module.exports = function(app, fs) {
         newNote.id = id;
         console.log(newNote);
 
-        notesDB.push(newNote)
-        res.json(true);
-        // res.json(newNote);
+        notesDB.push(newNote);
+        
+        // when to use res.json(true)???
+        // res.json(true);
+        res.json(newNote);
+
         console.log(notesDB);
 
         fs.writeFileSync("./db/db.json", JSON.stringify(notesDB));
         res.json(notesDB);
     
     });
+
+    app.get("/api/notes/:id", function(req, res) {
+        let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+        res.json(savedNotes[Number(req.params.id)]);
+    });
+
+    app.delete("/api/notes/:id", (req, res) => {
+
+    //     var deleteNote = req.body;
+    //     console.log(deleteNote);
+    //     for (var i = 0; i < notesDB.length; i++ ){
+    //         if (deleteNote === notesDB[i].id) {
+    //             notesDB.splice(i, 1)
+    //         }
+    // }
+    // fs.writeFileSync("./db/db.json", JSON.stringify(notesDB));
+    // res.json(notesDB);
+
+    let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let noteID = req.params.id;
+    let newID = 0;
+    console.log(`Deleting note with ID ${noteID}`);
+    savedNotes = savedNotes.filter(currNote => {
+        return currNote.id != noteID;
+    })
+    
+    for (currNote of savedNotes) {
+        currNote.id = newID.toString();
+        newID++;
+    }
+
+    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
+    res.json(savedNotes);
+
+
+
+    })
 
 //   module.exports = userRoutes;
 }
