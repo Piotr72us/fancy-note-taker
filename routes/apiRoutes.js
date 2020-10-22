@@ -32,33 +32,18 @@ module.exports = function(app, fs) {
         res.json(notesDB);
     });
 
-    // app.get("/api/notes/:id", function(req, res) {
-    //     let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-    //     res.json(savedNotes[Number(req.params.id)]);
-    // });
-
     app.delete("/api/notes/:id", (req, res) => {
-
-    //     var deleteNote = req.body;
-    //     console.log(deleteNote);
-    //     for (var i = 0; i < notesDB.length; i++ ){
-    //         if (deleteNote === notesDB[i].id) {
-    //             notesDB.splice(i, 1)
-    //         }
-    // }
-    // fs.writeFileSync("./db/db.json", JSON.stringify(notesDB));
-    // res.json(notesDB);
 
     let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
     let noteID = req.params.id;
     let newID = 0;
     
-    savedNotes = savedNotes.filter(currNote => {
-        return currNote.id != noteID;
+    savedNotes = savedNotes.filter(currentNote => {
+        return currentNote.id != noteID;
     })
     
-    for (currNote of savedNotes) {
-        currNote.id = newID.toString();
+    for (currentNote of savedNotes) {
+        currentNote.id = newID.toString();
         newID++;
     }
 
