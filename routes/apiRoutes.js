@@ -22,7 +22,6 @@ module.exports = function(app, fs) {
 
         notesDB.push(newNote);
         
-        // why to use res.json(true)???
         // res.json(true);
         res.json(newNote);
 
