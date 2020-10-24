@@ -41,7 +41,7 @@ module.exports = function(app, fs) {
         return currentNote.id != noteID;
     })
     
-    for (currentNote of savedNotes) {
+    for (var i = 0; i < savedNotes.length; i++) {
         currentNote.id = newID.toString();
         newID++;
     }
