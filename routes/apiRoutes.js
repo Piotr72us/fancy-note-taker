@@ -2,17 +2,12 @@
 
 const fs = require("fs");
 let notesDB = require("../db/db.json");
+
 module.exports = function(app) {
 
     // read file
     app.get("/api/notes", (req, res) => {
         res.json(notesDB);
-        // fs.readFile(dataPath, "utf8", (err, data) => {
-        //     if (err) {
-        //     throw err;
-        // }
-        // res.send(JSON.parse(data));
-        // });
     });
 
     app.post("/api/notes", (req, res) => {
@@ -22,9 +17,6 @@ module.exports = function(app) {
         newNote.id = id;
 
         notesDB.push(newNote);
-        
-        
-        console.log(notesDB);
 
         fs.writeFile("./db/db.json", JSON.stringify(notesDB, null, 2), function() {
             res.json(notesDB);
@@ -35,7 +27,6 @@ module.exports = function(app) {
 
     let savedNotes2 = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
     let noteID = req.params.id;
-    let newID = 0;
     
     savedNotes2 = savedNotes2.filter(currentNote => {
         return currentNote.id != noteID;
