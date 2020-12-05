@@ -1,17 +1,18 @@
 // API routes
 
-module.exports = function(app, fs) {
+const fs = require("fs");
+let notesDB = require("../db/db.json");
+module.exports = function(app) {
 
-    let notesDB = require("../db/db.json");
-    const dataPath = "./db/db.json";
     // read file
     app.get("/api/notes", (req, res) => {
-        fs.readFile(dataPath, "utf8", (err, data) => {
-            if (err) {
-            throw err;
-        }
-        res.send(JSON.parse(data));
-        });
+        res.json(notesDB);
+        // fs.readFile(dataPath, "utf8", (err, data) => {
+        //     if (err) {
+        //     throw err;
+        // }
+        // res.send(JSON.parse(data));
+        // });
     });
 
     app.post("/api/notes", (req, res) => {
@@ -22,31 +23,31 @@ module.exports = function(app, fs) {
 
         notesDB.push(newNote);
         
-        // res.json(true);
-        res.json(newNote);
-
+        
         console.log(notesDB);
 
-        fs.writeFileSync("./db/db.json", JSON.stringify(notesDB, null, 2));
-        res.json(notesDB);
+        fs.writeFile("./db/db.json", JSON.stringify(notesDB, null, 2), function() {
+            res.json(notesDB);
+        });
     });
 
     app.delete("/api/notes/:id", (req, res) => {
 
-    let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let savedNotes2 = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
     let noteID = req.params.id;
     let newID = 0;
     
-    savedNotes = savedNotes.filter(currentNote => {
+    savedNotes2 = savedNotes2.filter(currentNote => {
         return currentNote.id != noteID;
     })
     
-    for (var i = 0; i < savedNotes.length; i++) {
-        currentNote.id = newID.toString();
-        newID++;
+    for (var i = 0; i < savedNotes2.length; i++) {
+        savedNotes2[i].id = i.toString();
     }
 
-    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes, null, 2));
-    res.json(savedNotes);
+    notesDB = savedNotes2
+    fs.writeFile("./db/db.json", JSON.stringify(savedNotes2, null, 2), function() {
+        res.json(savedNotes2);
+    });  
     })
 }
