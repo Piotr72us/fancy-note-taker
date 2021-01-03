@@ -14,9 +14,10 @@ This browser application allows you to create, store, edit, and delete notes. Ea
 * [Questions](#Questions)
 
 ## Installation
-This application will be invoked with the following command:
+
 ```
 This application runs on Heroku server under the link below:
+https://serene-oasis-86335.herokuapp.com/
 ```
 
 ## Usage
