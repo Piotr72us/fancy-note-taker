@@ -1,5 +1,9 @@
 // API routes
 
+// uuid npm package for creating unique IDs
+const { v4: uuidv4 } = require('uuid');
+
+
 const fs = require("fs");
 let notesDB = require("../db/db.json");
 
@@ -13,7 +17,13 @@ module.exports = function(app) {
     app.post("/api/notes", (req, res) => {
         
         var newNote = req.body;
-        var id = (notesDB.length).toString();
+
+        //initial method of creating unique IDs
+            // var id = (notesDB.length).toString();
+            // newNote.id = id;
+
+        // uuid creates unique IDs
+        var id = uuidv4();
         newNote.id = id;
 
         notesDB.push(newNote);
