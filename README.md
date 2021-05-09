@@ -37,7 +37,7 @@ This application is covered under the MIT license.
 If you would like to contribute to this project, please let me know.
 
 ## Test
-Testing framework used: TBD
+Testing framework used: to be developed
 
 ## Questions
 If you have additional questions, you can reach me via my GitHub profile: [peterdudek](https://github.com/peterdudek)<br/>
